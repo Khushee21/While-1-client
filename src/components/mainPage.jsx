@@ -3,11 +3,9 @@ import Footer from "./Footer";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
 
-  const navigate=useNavigate();
 
   return (
     <div className="font-poppins">
