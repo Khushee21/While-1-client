@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Header from "./Header";
+const baseURL = import.meta.env.VITE_API_URL;
 
 const InterviewPreparation = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -164,7 +165,7 @@ const InterviewPreparation = () => {
         setAiResponse("");
 
         try {
-          const res = await fetch("http://localhost:5000/api/ai/ask-ai", {
+          const res = await fetch(`${baseURL}/api/ai/ask-ai`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userInput }),

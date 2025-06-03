@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Header";
+const baseURL = import.meta.env.VITE_API_URL;
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -25,7 +26,7 @@ const Notifications = () => {
       try {
         setLoading(true);
         const res = await axios.get(
-          `http://localhost:5000/api/notifications/${loggedInUserEmail}`
+          `${baseURL}/api/notifications/${loggedInUserEmail}`
         );
         setNotifications(res.data);
         setError(null);
@@ -50,7 +51,7 @@ const Notifications = () => {
       console.log("Sender:", senderEmail);
 console.log("Receiver:", loggedInUserEmail);
 
-      await axios.put("http://localhost:5000/api/notifications/respond", {
+      await axios.put(`${baseURL}/api/notifications/respond`, {
         from: senderEmail,
         to: loggedInUserEmail,
         isAccepted
@@ -58,7 +59,7 @@ console.log("Receiver:", loggedInUserEmail);
   
 
       const res = await axios.get(
-        `http://localhost:5000/api/notifications/${loggedInUserEmail}`
+        `${baseURL}/api/notifications/${loggedInUserEmail}`
       );
       setNotifications(res.data);
    // Assuming the sender is the logged-in user

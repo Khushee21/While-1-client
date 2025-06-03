@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import axios from "axios";
+const baseURL = import.meta.env.VITE_API_URL;
 
 const SkillSwap = () => {
   const [skillmates, setSkillmates] = useState([]);
@@ -17,7 +18,7 @@ const SkillSwap = () => {
   useEffect(() => {
     const fetchSkillmates = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/skillmates");
+        const res = await axios.get(`${baseURL}/api/skillmates`);
         const others = res.data.filter(
           (skillmate)=> skillmate.email !== loggedInUser?.email
         );
@@ -37,7 +38,7 @@ const SkillSwap = () => {
     
     try {
       // Update the POST request with the correct field names `from` and `to`
-      await axios.post("http://localhost:5000/api/notifications", {
+      await axios.post(`${baseURL}/api/notifications`, {
         from: loggedInUser.email,  // Sender's email (logged-in user)
         to: receiverEmail,         // Receiver's email (the skillmate you're connecting with)
       });

@@ -4,6 +4,7 @@ import { FiSearch, FiUser, FiChevronLeft, FiSend, FiPaperclip, FiPhone, FiVideo 
 import axios from 'axios';
 import Header from './Header';
 import { io } from 'socket.io-client';
+const baseURL = import.meta.env.VITE_API_URL;
 
 const ChatBox = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -21,7 +22,7 @@ const ChatBox = () => {
   console.log('recevier email',receiverEmail);
   useEffect(() => {
     // Initialize Socket.io connection
-    socketRef.current = io('http://localhost:5000');
+    socketRef.current = io(`${baseURL}`);
 
     socketRef.current.on('connect', () => {
       console.log('Connected to socket server', socketRef.current.id);
@@ -79,7 +80,7 @@ const ChatBox = () => {
     const fetchChatUsers = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/notifications/chat-list', {
+        const res = await axios.get(`${baseURL}/api/notifications/chat-list`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

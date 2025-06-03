@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
+const baseURL = import.meta.env.VITE_API_URL;
 
 const AllMentorPage = () => {
   const [mentors, setMentors] = useState([]);
@@ -9,7 +10,7 @@ const AllMentorPage = () => {
   useEffect(() => {
     const fetchMentors = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/mentors");
+        const res = await axios.get(`${baseURL}/api/mentors`);
         setMentors(res.data);
       } catch (error) {
         console.error("Error Fetching mentors:", error);

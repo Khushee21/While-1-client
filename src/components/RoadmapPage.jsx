@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import Header from "./Header";
+const baseURL = import.meta.env.VITE_API_URL;
 
 const RoadmapPage = () => {
   const { tech } = useParams();
@@ -11,7 +12,7 @@ const RoadmapPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/roadmap/${tech}`)
+      .get(`${baseURL}/api/roadmap/${tech}`)
       .then((res) => setRoadmap(res.data))
       .catch(() => setError("Roadmap not found"));
   }, [tech]);

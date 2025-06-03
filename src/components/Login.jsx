@@ -7,6 +7,7 @@ import ReviewSlider from "./ReviewSlider";
 import LoginFooter from "./Loginfooter";
 import FloatingContactButtons from "./FlootingContactBtn";
 import CookieConsent from "./CookieConsent";
+const baseURL = import.meta.env.VITE_API_URL;
 function Login() {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [skill, setSkill] = useState('');
@@ -48,8 +49,8 @@ function Login() {
         : { email, password, skillLevel, skills, description: achievement};
 
       const endpoint = isSignInForm
-        ? "http://localhost:5000/api/auth/login"
-        : "http://localhost:5000/api/auth/signup";
+        ? `${baseURL}/api/auth/login`
+        : `${baseURL}/api/auth/signup`;
 
       const response = await axios.post(endpoint, payload);
 
